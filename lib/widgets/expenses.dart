@@ -1,3 +1,4 @@
+import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
@@ -71,12 +72,14 @@ class _Expenses extends State<Expenses> {
       ),
       body: Column(
         children: [
-          Text('Charts!!!'),
+          Chart(expenses: _registeredExpenses),
           Expanded(
-            child: ExpensesList(
-              expenses: _registeredExpenses,
-              onExpenseDeleted: _removeExpense,
-            ),
+            child: _registeredExpenses.isNotEmpty
+                ? ExpensesList(
+                    expenses: _registeredExpenses,
+                    onExpenseDeleted: _removeExpense,
+                  )
+                : Center(child: Text('No Expense Found Try Adding some...')),
           ),
         ],
       ),
