@@ -63,6 +63,19 @@ class _Expenses extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
+    Widget mainContent = Center(
+      child: Text('No Expense Found Try Adding some...'),
+    );
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onExpenseDeleted: _removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Expense Tracker'),
@@ -70,19 +83,19 @@ class _Expenses extends State<Expenses> {
           IconButton(onPressed: _showAddExpensePopup, icon: Icon(Icons.add)),
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: _registeredExpenses.isNotEmpty
-                ? ExpensesList(
-                    expenses: _registeredExpenses,
-                    onExpenseDeleted: _removeExpense,
-                  )
-                : Center(child: Text('No Expense Found Try Adding some...')),
-          ),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(child: mainContent),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: Chart(expenses: _registeredExpenses)),
+                Expanded(child: mainContent),
+              ],
+            ),
     );
   }
 }
