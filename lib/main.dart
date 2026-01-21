@@ -17,7 +17,7 @@ void main() {
   // ) {
   runApp(
     MaterialApp(
-      darkTheme: ThemeData().copyWith(
+      darkTheme: ThemeData.dark().copyWith(
         colorScheme: kColorSchemeDark,
         appBarTheme: AppBarTheme().copyWith(
           foregroundColor: kColorSchemeDark.onPrimaryContainer,
@@ -35,7 +35,7 @@ void main() {
             foregroundColor: kColorSchemeDark.onPrimaryContainer,
           ),
         ),
-        textTheme: ThemeData().textTheme.copyWith(
+        textTheme: ThemeData.dark().textTheme.copyWith(
           titleLarge: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
