@@ -53,6 +53,7 @@ class _Expenses extends State<Expenses> {
 
   void _showAddExpensePopup() {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (ctx) {
